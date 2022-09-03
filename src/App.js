@@ -9,6 +9,7 @@ import MarketPage from "./components/pages/MaketPage";
 import getItems from './apis/fake_items';
 import NotFound from "./components/pages/NotFound";
 import NavBar from "./components/large components/NavBar";
+import SellPage from "./components/pages/SellPage";
 
 class App extends Component {
   state = {
@@ -17,8 +18,22 @@ class App extends Component {
 
   componentDidMount() {
     const items = getItems();
-    console.log("items we read is", items);
     this.setState({items});
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.items !== this.state.items) {
+      // Now fetch the new data here.
+      console.log("prevState is", prevState.items);
+      console.log("now the state is", this.state.items);
+    }
+  }
+
+  handleSell = (pic, name, description) => {
+    console.log("handleSell called")
+    const newItem = {pic: pic, name: name, description:description};
+    const newItems = {...this.state.items, newItem}
+    this.setState({items:newItems});
   }
 
   render() {
@@ -32,6 +47,11 @@ class App extends Component {
           <Route
               path="/Market"
               element={<MarketPage items={this.state.items}/>}
+            />
+
+            <Route
+              path="/Sell"
+              element={<SellPage handleSell={this.handleSell}/>}
             />
             
             <Route path="/not-found" element={<NotFound />} />

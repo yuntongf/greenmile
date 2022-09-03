@@ -3,11 +3,11 @@ import ItemCard from "../large components/ItemCard";
 const MarketPage = ({ items }) => {
    console.log(items);
    return (
-      <div className="col-12 d-flex justify-content-center mt-4">
-         <div className="d-flex row row-cols-5">
+      <div className="d-flex justify-content-center mt-4">
+         <div className="col-8 row row-cols-md-4">
             {
                items.map(item => (
-                  <div className="col ms-3 me-3">
+                  <div className="col">
                      <ItemCard item={item} />
                   </div>
                ))

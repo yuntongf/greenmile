@@ -5,7 +5,7 @@ const NavBar = () => {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light ps-5">
-                <Link className="navbar-brand ms-4" to="/Shopping">GreenMile</Link>
+                <Link className="navbar-brand ms-4" to="/Market">GreenMile</Link>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ">
