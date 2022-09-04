@@ -71,6 +71,5 @@ const items = [
 ]
 
 export default function getItems() {
-    console.log("items when first read is ", items);
     return items;
 }

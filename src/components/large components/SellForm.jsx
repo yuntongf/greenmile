@@ -1,4 +1,4 @@
-import React from "react";
+import React, { setState } from "react";
 import Joi from "joi-browser";
 import Form from "../common/Form";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 class SellForm extends Form {
    state = {
       data: { name: "", description: "", pic: "" },
+      file: "",
       errors: {}
    };
    schema = {
@@ -24,8 +25,9 @@ class SellForm extends Form {
    doSubmit = () => {
       try {
          const { data } = this.state;
-         return () => this.props.handleSell(data.pic, data.name, data.description);
-         //window.location = "/Market";
+         const newItem = { owner: this.props.user._id, pic: this.state.file, name: data.name, description: data.description, steps: 0 }
+         this.props.handleSell(newItem);
+         window.location = "/Market";
       } catch (ex) {
          if (ex.response && ex.response.status === 400) {
             const errors = { ...this.state.errors };
@@ -36,53 +38,32 @@ class SellForm extends Form {
       }
    };
 
-   /*doDemo = async () => {
-      try {
-         await auth.login("Guest-Demo", "peaceful-raisin");
-         toast.success('🦄 You are all set! Your temp username: "Guest-Demo" Your temp password: "peaceful-raisin"', {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-         });
-         setTimeout(() => {
-            window.location = "/MessageBoard";
-         }, 5000)
-      } catch (ex) {
-         if (ex.response && ex.response.status === 400) {
-            const errors = { ...this.state.errors };
-            errors.username = ex.response.data;
-            errors.password = ex.response.data;
-            this.setState({ errors });
-         }
-      }
-   };*/
-
    render() {
       return (
          <div>
             <div>
                <div className="mt-5 d-flex justify-content-center">
                   <div className="col-6">
-                     <h2 className="mt-5 mb-5">Sell</h2>
+                     <h2 className="mt-5 ">Sell</h2>
+                     <p className="mb-5">A thousand miles begins with a single step</p>
                      <form onSubmit={this.handleSubmit}>
                         {this.renderInput("name", "Name")}
                         {this.renderInput("description", "Description")}
-                        <form>
-                           <div class="form-group">
-                              <h4>Upload a picture</h4>
-                              <input type="file" class="form-control-file mt-2" id="exampleFormControlFile1"></input>
-                           </div>
-                        </form>
+                        <input
+                           type="file"
+                           name="pic"
+                           onChange={(event) => {
+                              const file = event.target.files[0];
+                              console.log(file);
+                              setState({ file });
+                           }}
+                        />
                         <div className="mt-5 d-flex justify-content-between">
-                           <Link to="/Market">
-                              <btn onClick={() => this.doSubmit()} className="btn btn-outline-success">
+                           <a href="/Market">
+                              <btn onClick={this.doSubmit} className="btn btn-outline-success">
                                  Sell
                               </btn>
-                           </Link>
+                           </a>
                         </div>
 
                      </form>

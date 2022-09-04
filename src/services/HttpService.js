@@ -1,12 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import auth from "./AuthService";
-
-/*if (process.env.NODE_ENV === "development") {
-  axios.defaults.baseURL = "http://localhost:3000";
-} else if (process.env.NODE_ENV === "production") {
-  "https://amb-back.herokuapp.com"
-}*/
 
 axios.defaults.headers.common['x-token'] = localStorage.getItem("token");
 

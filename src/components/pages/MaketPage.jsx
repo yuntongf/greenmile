@@ -1,10 +1,9 @@
 import ItemCard from "../large components/ItemCard";
 
 const MarketPage = ({ items }) => {
-   console.log(items);
    return (
       <div className="d-flex justify-content-center mt-4">
-         <div className="col-8 row row-cols-md-4">
+         <div className="col-8 row row-cols-4">
             {
                items.map(item => (
                   <div className="col">
