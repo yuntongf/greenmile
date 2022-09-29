@@ -1,4 +1,4 @@
-# PennPals
+# GreenMiles
 
 ## Description
 GreenMile project at PennApps
